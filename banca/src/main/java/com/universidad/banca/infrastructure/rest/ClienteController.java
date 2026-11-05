@@ -1,14 +1,20 @@
 package com.universidad.banca.infrastructure.rest;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.universidad.banca.domain.model.Cliente;
 import com.universidad.banca.domain.model.TipoCredencial;
 import com.universidad.banca.usecase.ActualizarDatosUseCase;
 import com.universidad.banca.usecase.ModificarCredencialesUseCase;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/clientes")
@@ -24,10 +30,9 @@ public class ClienteController {
         this.modificarCredencialesUseCase = modificarCredencialesUseCase;
     }
 
-    // HU-04: Endpoint para Actualización de Datos Personales
     @PutMapping("/{clienteId}/datos")
-    public ResponseEntity<Object> actualizarDatos(@PathVariable Long clienteId,
-                                                  @RequestBody DatosRequest request) {
+    public ResponseEntity<?> actualizarDatos(@PathVariable Long clienteId,
+                                             @RequestBody DatosRequest request) {
         try {
             Cliente actualizado = actualizarDatosUseCase.ejecutar(
                     clienteId,
@@ -35,9 +40,10 @@ public class ClienteController {
                     request.getTelefono(),
                     request.getDireccion()
             );
+
             Map<String, Object> respuesta = new LinkedHashMap<>();
             respuesta.put("mensaje", "Datos personales actualizados exitosamente.");
-            respuesta.put("id", actualizado.getId());
+            respuesta.put("clienteId", actualizado.getId());
             respuesta.put("usuario", actualizado.getUsuario());
             respuesta.put("correo", actualizado.getCorreo());
             respuesta.put("telefono", actualizado.getTelefono());
@@ -48,10 +54,13 @@ public class ClienteController {
         }
     }
 
-    // HU-05: Endpoint para Modificación de Credenciales (CLAVE o PIN)
     @PutMapping("/{clienteId}/credenciales")
-    public ResponseEntity<Object> modificarCredenciales(@PathVariable Long clienteId,
-                                                        @RequestBody CredencialRequest request) {
+    public ResponseEntity<?> modificarCredenciales(@PathVariable Long clienteId,
+                                                   @RequestBody CredencialRequest request) {
+        if (request.getTipo() == null) {
+            return ResponseEntity.badRequest().body(
+                    Map.of("mensaje", "Debe indicar el tipo de credencial: CLAVE o PIN."));
+        }
         try {
             modificarCredencialesUseCase.ejecutar(
                     clienteId,
@@ -68,7 +77,6 @@ public class ClienteController {
         }
     }
 
-    // Clase interna estática para HU-04 según el diagrama de clases
     public static class DatosRequest {
         private String correo;
         private String telefono;
@@ -87,7 +95,6 @@ public class ClienteController {
         public void setDireccion(String direccion) { this.direccion = direccion; }
     }
 
-    // Clase interna estática para HU-05 según el diagrama de clases
     public static class CredencialRequest {
         private TipoCredencial tipo;
         private String actual;

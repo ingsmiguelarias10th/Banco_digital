@@ -36,18 +36,17 @@ public class ModificarCredencialesUseCase {
             Cuenta cuenta = cuentaRepository.buscarPorClienteId(clienteId)
                     .orElseThrow(() -> new IllegalArgumentException("No se encontró cuenta para el cliente: " + clienteId));
 
-            // Criterio C4 (HU-05): Validar que el PIN actual coincida con el registrado
-            boolean pinCoincide = codificador.coincide(actual, cuenta.getPin()) || actual.equals(cuenta.getPin());
-            if (!pinCoincide) {
+            // C4: el PIN actual debe coincidir con el registrado
+            if (!codificador.coincide(actual, cuenta.getPin())) {
                 throw new IllegalArgumentException("El PIN actual ingresado no coincide con el registrado en el sistema.");
             }
 
-            // Criterio C2 (HU-05): Validar que el nuevo PIN tenga exactamente 4 dígitos numéricos
+            // C2: el nuevo PIN debe tener exactamente cuatro dígitos numéricos
             if (!nueva.matches("^\\d{4}$")) {
                 throw new IllegalArgumentException("El nuevo PIN debe contener exactamente cuatro dígitos numéricos.");
             }
 
-            // Criterio C1 (HU-05): Guardar el nuevo PIN en el sistema
+            // C1: se guarda el nuevo PIN codificado (RNF03)
             cuenta.setPin(codificador.codificar(nueva));
             cuentaRepository.guardar(cuenta);
 
@@ -55,13 +54,12 @@ public class ModificarCredencialesUseCase {
             Cliente cliente = clienteRepository.buscarPorId(clienteId)
                     .orElseThrow(() -> new IllegalArgumentException("No se encontró el cliente con ID: " + clienteId));
 
-            // Criterio C4 (HU-05): Validar que la clave actual coincida con la registrada
-            boolean claveCoincide = codificador.coincide(actual, cliente.getClave()) || actual.equals(cliente.getClave());
-            if (!claveCoincide) {
+            // C4: la clave actual debe coincidir con la registrada
+            if (!codificador.coincide(actual, cliente.getClave())) {
                 throw new IllegalArgumentException("La clave de acceso actual no coincide con la registrada en el sistema.");
             }
 
-            // Criterio C3 (HU-05): Guardar la nueva clave de acceso en el sistema
+            // C3: se guarda la nueva clave codificada (RNF03)
             cliente.setClave(codificador.codificar(nueva));
             clienteRepository.guardar(cliente);
         }
