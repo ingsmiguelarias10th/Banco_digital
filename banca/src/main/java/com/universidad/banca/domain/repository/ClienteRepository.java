@@ -1,7 +1,8 @@
 package com.universidad.banca.domain.repository;
 
-import com.universidad.banca.domain.Cliente;
 import java.util.Optional;
+
+import com.universidad.banca.domain.model.Cliente;
 
 public interface ClienteRepository {
 

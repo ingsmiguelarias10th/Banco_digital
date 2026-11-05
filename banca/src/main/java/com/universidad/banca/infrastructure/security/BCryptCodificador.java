@@ -1,29 +1,23 @@
 package com.universidad.banca.infrastructure.security;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import com.universidad.banca.domain.service.CodificadorCredenciales;
 
-public class BCryptCodificador implements CodificadorCredenciales{
+@Component
+public class BCryptCodificador implements CodificadorCredenciales {
 
-    private BCryptPasswordEncoder encoder;
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public BCryptCodificador() {
-        this.encoder = new BCryptPasswordEncoder();
+    @Override
+    public String codificar(String textoPlano) {
+        return encoder.encode(textoPlano);
     }
 
     @Override
-    public String codificar(String plano) {
-
-        return encoder.encode(plano);
-
-    }
-
-    @Override
-    public boolean coincide(String plano, String codificado) {
-
-        return encoder.matches(plano, codificado);
-
+    public boolean coincide(String textoPlano, String codificado) {
+        return encoder.matches(textoPlano, codificado);
     }
 
 }
