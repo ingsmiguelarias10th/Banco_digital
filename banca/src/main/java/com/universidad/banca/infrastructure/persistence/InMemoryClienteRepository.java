@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.universidad.banca.domain.model.Cliente;
 import com.universidad.banca.domain.repository.ClienteRepository;
 
+
 @Repository
 public class InMemoryClienteRepository implements ClienteRepository {
     private final List<Cliente> memoria = new ArrayList<>();
