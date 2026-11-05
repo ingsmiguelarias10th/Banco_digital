@@ -15,7 +15,7 @@ public class ValidadorRetiro {
         this.codificador = codificador;
     }
 
-    public void validar(Cuenta cuenta, Long monto, String pin, LocalDate fecha) {
+public void validar(Cuenta cuenta, Long monto, String pin, LocalDate fecha) {
 
         if (!codificador.coincide(pin, cuenta.getPin())) {
             throw new IllegalArgumentException("Error: El PIN ingresado es incorrecto.");
@@ -23,6 +23,10 @@ public class ValidadorRetiro {
 
         if (monto < MONTO_MINIMO) {
             throw new IllegalArgumentException("Error: El monto mínimo de retiro es " + MONTO_MINIMO + ".");
+        }
+
+        if (monto % 10000 != 0) {
+            throw new IllegalArgumentException("Error: El monto debe poder entregarse con billetes de 100.000, 50.000, 20.000 y 10.000.");
         }
 
         long acumuladoHoy = 0;
