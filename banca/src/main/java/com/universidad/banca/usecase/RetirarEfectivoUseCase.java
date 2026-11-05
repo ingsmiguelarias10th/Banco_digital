@@ -9,7 +9,6 @@ import com.universidad.banca.domain.repository.CuentaRepository;
 import com.universidad.banca.domain.service.DispensadorBilletes;
 import com.universidad.banca.domain.service.ValidadorRetiro;
 
-
 public class RetirarEfectivoUseCase {
 
     private final CuentaRepository cuentaRepository;
@@ -22,30 +21,28 @@ public class RetirarEfectivoUseCase {
         this.dispensador = dispensador;
     }
 
-    public Map<Integer, Integer> ejecutar(Long clientId, long monto, String pin) {
-        
-        Optional<Cuenta> cuentaOpt = cuentaRepository.buscarPorClienteId(clientId);
-        
+    public Map<Integer, Integer> ejecutar(Long clienteId, long monto, String pin) {
+        LocalDate hoy = LocalDate.now();
+
+        Optional<Cuenta> cuentaOpt = cuentaRepository.buscarPorClienteId(clienteId);
         if (cuentaOpt.isEmpty()) {
-            throw new IllegalArgumentException("Error: La cuenta con ID " + clientId + " no existe.");
+            throw new IllegalArgumentException("Cuenta no encontrada");
         }
-        
         Cuenta cuenta = cuentaOpt.get();
 
-        validador.validar(cuenta, monto, pin, LocalDate.now());
+        validador.validar(cuenta, monto, pin, hoy);
+        Map<Integer, Integer> billetes = dispensador.calcular(monto);
+
+    // Si el acumulado es de otro día (o nunca hubo retiros), se reinicia (C7)
+        if (!hoy.equals(cuenta.getFechaAcumulado())) {
+            cuenta.setAcumuladoDiario(0L);
+            cuenta.setFechaAcumulado(hoy);
+        }
 
         cuenta.setSaldo(cuenta.getSaldo() - monto);
-
-        if (cuenta.getFechaAcumulado() == null || !cuenta.getFechaAcumulado().equals(LocalDate.now())) {
-            cuenta.setAcumuladoDiario(0l);
-            cuenta.setFechaAcumulado(LocalDate.now());
+        cuenta.setAcumuladoDiario(cuenta.getAcumuladoDiario() + monto);
+        cuentaRepository.guardar(cuenta);
+        return billetes;
         }
         
-        cuenta.setAcumuladoDiario(cuenta.getAcumuladoDiario() + monto);
-
-        cuentaRepository.guardar(cuenta);
-
-        return dispensador.calcular(monto);
-        
     }
-}

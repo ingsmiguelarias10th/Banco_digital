@@ -6,15 +6,15 @@ public class Cliente {
     private String usuario;
     private String clave;
     private String correo;
-    private String telofono;
+    private String telefono;
     private String direccion;
 
-    public Cliente(Long id, String usuario, String clave, String correo, String telofono, String direccion) {
+    public Cliente(Long id, String usuario, String clave, String correo, String telefono, String direccion) {
         this.id = id;
         this.usuario = usuario;
         this.clave = clave;
         this.correo = correo;
-        this.telofono = telofono;
+        this.telefono = telefono;
         this.direccion = direccion;
     }
     
@@ -42,11 +42,11 @@ public class Cliente {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-    public String getTelofono() {
-        return telofono;
+    public String getTelefono() {
+        return telefono;
     }
-    public void setTelofono(String telofono) {
-        this.telofono = telofono;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
     public String getDireccion() {
         return direccion;

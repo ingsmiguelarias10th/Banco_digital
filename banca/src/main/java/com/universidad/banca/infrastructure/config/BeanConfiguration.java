@@ -7,9 +7,12 @@ import org.springframework.context.annotation.Configuration;
 import com.universidad.banca.domain.repository.ClienteRepository;
 import com.universidad.banca.domain.repository.CuentaRepository;
 import com.universidad.banca.domain.service.CodificadorCredenciales;
+import com.universidad.banca.domain.service.DispensadorBilletes;
+import com.universidad.banca.domain.service.ValidadorRetiro;
 import com.universidad.banca.usecase.ConsultarSaldoUseCase;
 import com.universidad.banca.usecase.DepositarFondosUseCase;
 import com.universidad.banca.usecase.IniciarSesionUseCase;
+import com.universidad.banca.usecase.RetirarEfectivoUseCase;
 
 @Configuration
 public class BeanConfiguration {
@@ -31,6 +34,21 @@ public class BeanConfiguration {
     @Bean
     public DepositarFondosUseCase depositarFondosUseCase(CuentaRepository repo) {
         return new DepositarFondosUseCase(repo);
+    }
+
+    @Bean
+    public ValidadorRetiro validadorRetiro(CodificadorCredenciales codificador) {
+        return new ValidadorRetiro(codificador);
+    }
+
+    @Bean
+    public DispensadorBilletes dispensadorBilletes() {
+        return new DispensadorBilletes();
+    }
+
+    @Bean
+    public RetirarEfectivoUseCase retirarEfectivoUseCase(CuentaRepository repo, ValidadorRetiro validador, DispensadorBilletes dispensador) {
+        return new RetirarEfectivoUseCase(repo, validador, dispensador);
     }
 
     // ===== Incremento 3: datos personales y credenciales (HU-04, HU-05) =====
