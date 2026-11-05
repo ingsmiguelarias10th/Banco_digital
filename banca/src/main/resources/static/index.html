@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión · Banca Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- HU-01: Inicio de sesión -->
+    <div class="login">
+        <section class="login-marca">
+            <h1 class="marca-titulo">BANCA<br>DIGITAL</h1>
+            <div class="marca-linea"></div>
+            <p class="marca-bienvenida">¡BIENVENIDO!</p>
+            <p class="marca-texto">Consulte su saldo, deposite, retire efectivo y administre sus datos desde un solo lugar.</p>
+        </section>
+
+        <main class="login-formulario">
+            <div class="login-caja">
+                <h2>Iniciar sesión</h2>
+                <p class="subtitulo">Ingrese con su usuario y su clave de acceso.</p>
+
+                <form id="form-login" class="login-form" novalidate>
+                    <div class="campo-linea">
+                        <label for="usuario">Usuario</label>
+                        <input type="text" id="usuario" name="usuario" autocomplete="username" required>
+                    </div>
+                    <div class="campo-linea">
+                        <label for="clave">Clave de acceso</label>
+                        <input type="password" id="clave" name="clave" autocomplete="current-password" required>
+                    </div>
+
+                    <p id="mensaje-login" class="mensaje" role="alert" aria-live="polite"></p>
+
+                    <button type="submit" id="boton-login" class="boton-contorno">INGRESAR</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

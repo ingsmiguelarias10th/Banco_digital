@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel · Banca Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="layout">
+
+        <!-- ===== Barra lateral ===== -->
+        <aside class="sidebar">
+            <p class="sidebar-marca">BANCA<br>DIGITAL</p>
+            <div class="sidebar-linea"></div>
+
+            <nav class="menu" aria-label="Secciones">
+                <button type="button" class="nav-boton activo" data-vista="inicio">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/>
+                    </svg>
+                    Inicio
+                </button>
+                <button type="button" class="nav-boton" data-vista="operaciones">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="7" width="17" height="11" rx="1.5"/><circle cx="10.5" cy="12.5" r="2.6"/><path d="M5 4.5h15.5A1.5 1.5 0 0 1 22 6v9"/>
+                    </svg>
+                    Operaciones
+                </button>
+                <button type="button" class="nav-boton" data-vista="perfil">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1z"/>
+                    </svg>
+                    Datos personales
+                </button>
+                <button type="button" class="nav-boton" data-vista="seguridad">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>
+                    </svg>
+                    Seguridad
+                </button>
+            </nav>
+
+            <div class="sidebar-usuario">
+                <div class="avatar" id="avatar" aria-hidden="true"></div>
+                <div class="sidebar-usuario-datos">
+                    <small>Sesión iniciada</small>
+                    <strong id="sidebar-usuario"></strong>
+                </div>
+                <button type="button" class="boton-icono" id="boton-salir" aria-label="Cerrar sesión" title="Cerrar sesión">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+                    </svg>
+                </button>
+            </div>
+        </aside>
+
+        <div class="principal">
+
+            <!-- ===== Barra superior con el saldo siempre visible (HU-02) ===== -->
+            <header class="barra-superior">
+                <div>
+                    <h1 id="titulo-vista">Inicio</h1>
+                    <p id="subtitulo-vista">Resumen de su cuenta</p>
+                </div>
+                <div class="saldo-chip" aria-live="polite">
+                    <small>TU SALDO</small>
+                    <strong class="saldo-actual">$ ...</strong>
+                </div>
+            </header>
+
+            <main class="contenido">
+
+                <!-- ===== Inicio ===== -->
+                <section id="vista-inicio" class="vista">
+                    <div class="rejilla-inicio">
+                        <div class="saldo-hero">
+                            <p class="etiqueta-pequena">TU SALDO DISPONIBLE</p>
+                            <p class="saldo-hero-valor saldo-actual">$ ...</p>
+                            <p class="saldo-hero-nota">Tope diario de retiro: $ 1.000.000</p>
+                        </div>
+
+                        <div class="tarjeta">
+                            <p class="tarjeta-tipo">CUENTA DE AHORROS</p>
+                            <p class="tarjeta-numero"><span>**** **** ****</span> <strong id="tarjeta-numero">0000</strong></p>
+                            <div class="tarjeta-pie">
+                                <div class="tarjeta-dato">
+                                    <small>TITULAR</small>
+                                    <strong id="tarjeta-titular"></strong>
+                                </div>
+                                <div class="tarjeta-circulos" aria-hidden="true"><span></span><span></span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rejilla-2">
+                        <div class="panel-tarjeta">
+                            <h2>Accesos rápidos</h2>
+                            <p class="descripcion">Realice una operación sobre su cuenta</p>
+                            <div class="accesos">
+                                <button type="button" class="acceso" data-ir="monto-deposito">
+                                    <span class="acceso-icono">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M4 19h16"/>
+                                        </svg>
+                                    </span>
+                                    <span>Depositar<small>Sumar dinero</small></span>
+                                </button>
+                                <button type="button" class="acceso" data-ir="monto-retiro">
+                                    <span class="acceso-icono">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M12 15V3"/><polyline points="7 8 12 3 17 8"/><path d="M4 19h16"/>
+                                        </svg>
+                                    </span>
+                                    <span>Retirar<small>Efectivo con PIN</small></span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="panel-tarjeta">
+                            <h2>Movimientos</h2>
+                            <p class="descripcion">Operaciones realizadas en esta sesión</p>
+                            <div id="lista-movimientos"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== Operaciones: HU-03 depósito y HU-06 retiro ===== -->
+                <section id="vista-operaciones" class="vista oculto">
+                    <div class="rejilla-2">
+
+                        <!-- HU-03: Depósito -->
+                        <div class="panel-tarjeta">
+                            <h2>Depósito</h2>
+                            <p class="descripcion">El monto se suma de inmediato a su saldo</p>
+                            <form id="form-deposito" class="formulario" novalidate>
+                                <div class="caja-monto">
+                                    <label for="monto-deposito">Monto a depositar</label>
+                                    <div class="caja-monto-valor">
+                                        <span>$</span>
+                                        <input type="text" id="monto-deposito" inputmode="numeric" placeholder="0" autocomplete="off">
+                                    </div>
+                                </div>
+                                <p id="mensaje-deposito" class="mensaje" role="alert" aria-live="polite"></p>
+                                <button type="submit" class="boton-principal">Depositar</button>
+                            </form>
+                        </div>
+
+                        <!-- HU-06: Retiro -->
+                        <div class="panel-tarjeta">
+                            <h2>Retiro de efectivo</h2>
+                            <p class="descripcion">Mínimo $ 10.000, en múltiplos de $ 10.000. Tope diario de $ 1.000.000</p>
+                            <form id="form-retiro" class="formulario" novalidate>
+                                <div class="caja-monto">
+                                    <label for="monto-retiro">Monto a retirar</label>
+                                    <div class="caja-monto-valor">
+                                        <span>$</span>
+                                        <input type="text" id="monto-retiro" inputmode="numeric" placeholder="0" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="montos-rapidos">
+                                    <button type="button" class="monto-rapido" data-monto="50000">$ 50.000</button>
+                                    <button type="button" class="monto-rapido" data-monto="100000">$ 100.000</button>
+                                    <button type="button" class="monto-rapido" data-monto="200000">$ 200.000</button>
+                                    <button type="button" class="monto-rapido" data-monto="500000">$ 500.000</button>
+                                </div>
+                                <div class="campo campo-pin">
+                                    <label for="pin-retiro">PIN de seguridad</label>
+                                    <input type="password" id="pin-retiro" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="••••">
+                                </div>
+                                <p id="mensaje-retiro" class="mensaje" role="alert" aria-live="polite"></p>
+                                <div id="resultado-retiro" class="billetes oculto"></div>
+                                <button type="submit" class="boton-principal">Retirar</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== Datos personales: HU-04 ===== -->
+                <section id="vista-perfil" class="vista oculto">
+                    <div class="rejilla-2">
+                        <div class="panel-tarjeta">
+                            <h2>Datos registrados</h2>
+                            <p class="descripcion">Información de contacto de su cuenta</p>
+                            <div id="datos-actuales"></div>
+                        </div>
+
+                        <div class="panel-tarjeta">
+                            <h2>Actualizar datos</h2>
+                            <p class="descripcion">Deje en blanco los datos que no quiera cambiar</p>
+                            <form id="form-datos" class="formulario" novalidate>
+                                <div class="campo">
+                                    <label for="correo">Correo electrónico</label>
+                                    <input type="email" id="correo" placeholder="nombre@correo.com" autocomplete="email">
+                                </div>
+                                <div class="campo">
+                                    <label for="telefono">Teléfono</label>
+                                    <input type="tel" id="telefono" inputmode="numeric" placeholder="3001234567" autocomplete="tel">
+                                </div>
+                                <div class="campo">
+                                    <label for="direccion">Dirección</label>
+                                    <input type="text" id="direccion" placeholder="Calle 10 # 20-30" autocomplete="street-address">
+                                </div>
+                                <p id="mensaje-datos" class="mensaje" role="alert" aria-live="polite"></p>
+                                <button type="submit" class="boton-principal">Guardar cambios</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== Seguridad: HU-05 ===== -->
+                <section id="vista-seguridad" class="vista oculto">
+                    <div class="rejilla-2">
+
+                        <div class="panel-tarjeta">
+                            <h2>Clave de acceso</h2>
+                            <p class="descripcion">La clave nueva se usará en el próximo inicio de sesión</p>
+                            <form id="form-clave" class="formulario" data-tipo="CLAVE" novalidate>
+                                <div class="campo">
+                                    <label for="clave-actual">Clave actual</label>
+                                    <input type="password" id="clave-actual" class="credencial-actual" autocomplete="current-password">
+                                </div>
+                                <div class="campo">
+                                    <label for="clave-nueva">Clave nueva</label>
+                                    <input type="password" id="clave-nueva" class="credencial-nueva" autocomplete="new-password">
+                                </div>
+                                <div class="campo">
+                                    <label for="clave-confirmar">Confirmar clave nueva</label>
+                                    <input type="password" id="clave-confirmar" class="credencial-confirmar" autocomplete="new-password">
+                                </div>
+                                <p class="mensaje" role="alert" aria-live="polite"></p>
+                                <button type="submit" class="boton-principal">Cambiar clave</button>
+                            </form>
+                        </div>
+
+                        <div class="panel-tarjeta">
+                            <h2>PIN de seguridad</h2>
+                            <p class="descripcion">El PIN debe tener exactamente cuatro dígitos numéricos</p>
+                            <form id="form-pin" class="formulario" data-tipo="PIN" novalidate>
+                                <div class="campo campo-pin">
+                                    <label for="pin-actual">PIN actual</label>
+                                    <input type="password" id="pin-actual" class="credencial-actual" inputmode="numeric" maxlength="4" autocomplete="off">
+                                </div>
+                                <div class="campo campo-pin">
+                                    <label for="pin-nuevo">PIN nuevo</label>
+                                    <input type="password" id="pin-nuevo" class="credencial-nueva" inputmode="numeric" maxlength="4" autocomplete="off">
+                                </div>
+                                <div class="campo campo-pin">
+                                    <label for="pin-confirmar">Confirmar PIN nuevo</label>
+                                    <input type="password" id="pin-confirmar" class="credencial-confirmar" inputmode="numeric" maxlength="4" autocomplete="off">
+                                </div>
+                                <p class="mensaje" role="alert" aria-live="polite"></p>
+                                <button type="submit" class="boton-principal">Cambiar PIN</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/panel.js"></script>
+</body>
+</html>
