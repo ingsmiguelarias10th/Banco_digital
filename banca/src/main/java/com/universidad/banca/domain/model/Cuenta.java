@@ -11,15 +11,15 @@ public class Cuenta {
     private Long acumuladoDiario;
     private LocalDate fechaAcumulado;
 
-    public Cuenta(Long id, Long clienteId, String pin, Long saldo,
-              Long acumuladoDiario, LocalDate fechaAcumulado) {
-    this.id = id;
-    this.clienteId = clienteId;
-    this.pin = pin;
-    this.saldo = saldo;
-    this.acumuladoDiario = acumuladoDiario;
-    this.fechaAcumulado = fechaAcumulado;
-}
+    public Cuenta(Long id, Long clienteId, long saldo, String pin, long acumuladoDiario, LocalDate fechaAcumulado) {
+        this.id = id;
+        this.clienteId = clienteId;
+        this.saldo = saldo;
+        this.pin = pin;
+        this.acumuladoDiario = acumuladoDiario;
+        this.fechaAcumulado = fechaAcumulado;
+    }
+
     public Long getId() {
         return id;
     }
