@@ -1,7 +1,8 @@
 package com.universidad.banca.domain.repository;
 
-import com.universidad.banca.domain.Cuenta;
 import java.util.Optional;
+
+import com.universidad.banca.domain.model.Cuenta;
 
 public interface CuentaRepository {
     Cuenta guardar(Cuenta cuenta);
