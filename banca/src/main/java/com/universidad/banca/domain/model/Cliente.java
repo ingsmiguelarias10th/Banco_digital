@@ -1,4 +1,4 @@
-package main.java.com.universidad.banca.domain.model;
+package com.universidad.banca.domain.model;
 
 public class Cliente {
     
