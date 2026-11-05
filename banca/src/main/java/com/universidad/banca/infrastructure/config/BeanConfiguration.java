@@ -1,4 +1,3 @@
-
 package com.universidad.banca.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
@@ -7,12 +6,20 @@ import org.springframework.context.annotation.Configuration;
 import com.universidad.banca.domain.repository.ClienteRepository;
 import com.universidad.banca.domain.repository.CuentaRepository;
 import com.universidad.banca.domain.service.CodificadorCredenciales;
+<<<<<<< HEAD
 import com.universidad.banca.domain.service.DispensadorBilletes;
 import com.universidad.banca.domain.service.ValidadorRetiro;
 import com.universidad.banca.usecase.ConsultarSaldoUseCase;
 import com.universidad.banca.usecase.DepositarFondosUseCase;
 import com.universidad.banca.usecase.IniciarSesionUseCase;
 import com.universidad.banca.usecase.RetirarEfectivoUseCase;
+=======
+import com.universidad.banca.usecase.ActualizarDatosUseCase;
+import com.universidad.banca.usecase.ConsultarSaldoUseCase;
+import com.universidad.banca.usecase.DepositarFondosUseCase;
+import com.universidad.banca.usecase.IniciarSesionUseCase;
+import com.universidad.banca.usecase.ModificarCredencialesUseCase;
+>>>>>>> 2b7495d52874b8c4cab473890fea4fe06a45d5a8
 
 @Configuration
 public class BeanConfiguration {
@@ -53,4 +60,16 @@ public class BeanConfiguration {
 
     // ===== Incremento 3: datos personales y credenciales (HU-04, HU-05) =====
 
+    @Bean
+    public ActualizarDatosUseCase actualizarDatosUseCase(ClienteRepository clienteRepository) {
+        return new ActualizarDatosUseCase(clienteRepository);
+    }
+
+    @Bean
+    public ModificarCredencialesUseCase modificarCredencialesUseCase(
+            ClienteRepository clienteRepository,
+            CuentaRepository cuentaRepository,
+            CodificadorCredenciales codificador) {
+        return new ModificarCredencialesUseCase(clienteRepository, cuentaRepository, codificador);
+    }
 }
